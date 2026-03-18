@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Car Rental Cloud</title>
+    <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+    <main class="page-shell">
+        <section class="hero">
+            <div>
+                <p class="eyebrow">Plataforma em microsservicos</p>
+                <h1>Gerencie reservas, pagamentos e notificacoes em um unico painel.</h1>
+                <p class="hero-copy">
+                    Aplicacao demonstrativa para aluguel de carros com API principal, fila Redis,
+                    processamento assincrono e simulacao de notificacoes.
+                </p>
+            </div>
+            <div class="hero-card">
+                <span>Status da fila</span>
+                <strong id="systemStatus">Carregando...</strong>
+                <p>As reservas entram como pendentes, seguem para o servico de pagamento e depois acionam notificacoes.</p>
+            </div>
+        </section>
+
+        <section class="summary-grid" id="summaryGrid">
+            <article class="summary-card">
+                <span>Clientes</span>
+                <strong id="summaryCustomers">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Veiculos</span>
+                <strong id="summaryVehicles">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Disponiveis</span>
+                <strong id="summaryAvailable">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Reservas confirmadas</span>
+                <strong id="summaryReservations">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Pagamentos pendentes</span>
+                <strong id="summaryPayments">0</strong>
+            </article>
+            <article class="summary-card">
+                <span>Notificacoes recentes</span>
+                <strong id="summaryNotifications">0</strong>
+            </article>
+        </section>
+
+        <section class="toolbar">
+            <button id="refreshButton" class="button secondary">Atualizar painel</button>
+            <p id="feedback" class="feedback" aria-live="polite"></p>
+        </section>
+
+        <section class="content-grid">
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Novo cliente</h2>
+                    <p>Cadastre clientes para vincular reservas.</p>
+                </div>
+                <form id="customerForm" class="stack">
+                    <label>
+                        Nome completo
+                        <input type="text" name="full_name" required minlength="3" placeholder="Ex.: Marina Lima">
+                    </label>
+                    <label>
+                        E-mail
+                        <input type="email" name="email" required placeholder="cliente@exemplo.com">
+                    </label>
+                    <label>
+                        Telefone
+                        <input type="text" name="phone" placeholder="(11) 99999-0000">
+                    </label>
+                    <button type="submit" class="button">Criar cliente</button>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Novo veiculo</h2>
+                    <p>Inclua a frota disponivel para locacao.</p>
+                </div>
+                <form id="vehicleForm" class="stack">
+                    <label>
+                        Marca
+                        <input type="text" name="brand" required placeholder="Ex.: Nissan">
+                    </label>
+                    <label>
+                        Modelo
+                        <input type="text" name="model" required placeholder="Ex.: Kicks">
+                    </label>
+                    <div class="inline-grid">
+                        <label>
+                            Ano
+                            <input type="number" name="year" min="2000" max="2100" required value="2024">
+                        </label>
+                        <label>
+                            Diaria (R$)
+                            <input type="number" name="daily_rate" min="1" step="0.01" required value="210">
+                        </label>
+                    </div>
+                    <label>
+                        Placa
+                        <input type="text" name="license_plate" required placeholder="ABC1D23">
+                    </label>
+                    <button type="submit" class="button">Criar veiculo</button>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Nova reserva</h2>
+                    <p>Ao salvar, o pagamento entra em processamento assincrono.</p>
+                </div>
+                <form id="reservationForm" class="stack">
+                    <label>
+                        Cliente
+                        <select id="reservationCustomerId" name="customer_id" required></select>
+                    </label>
+                    <label>
+                        Veiculo
+                        <select id="reservationVehicleId" name="vehicle_id" required></select>
+                    </label>
+                    <div class="inline-grid">
+                        <label>
+                            Data inicial
+                            <input type="date" name="start_date" required>
+                        </label>
+                        <label>
+                            Data final
+                            <input type="date" name="end_date" required>
+                        </label>
+                    </div>
+                    <label class="checkbox-row">
+                        <input type="checkbox" name="simulate_payment_failure">
+                        Simular falha no pagamento desta reserva
+                    </label>
+                    <button type="submit" class="button">Criar reserva</button>
+                </form>
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Status do veiculo</h2>
+                    <p>Use este formulario para manutencao ou ajustes administrativos.</p>
+                </div>
+                <form id="vehicleStatusForm" class="stack">
+                    <label>
+                        Veiculo
+                        <select id="statusVehicleId" name="vehicle_id" required></select>
+                    </label>
+                    <label>
+                        Novo status
+                        <select name="status" required>
+                            <option value="available">available</option>
+                            <option value="reserved">reserved</option>
+                            <option value="maintenance">maintenance</option>
+                        </select>
+                    </label>
+                    <button type="submit" class="button">Atualizar status</button>
+                </form>
+            </article>
+        </section>
+
+        <section class="content-grid wide">
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Clientes cadastrados</h2>
+                    <p>Base de clientes disponivel para reservas.</p>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Nome</th>
+                                <th>E-mail</th>
+                                <th>Telefone</th>
+                            </tr>
+                        </thead>
+                        <tbody id="customersTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Veiculos</h2>
+                    <p>Frota com diaria e situacao atual.</p>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Veiculo</th>
+                                <th>Placa</th>
+                                <th>Diaria</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="vehiclesTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+        </section>
+
+        <section class="content-grid wide">
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Reservas</h2>
+                    <p>Acompanhe o ciclo: pendente, confirmado ou falha.</p>
+                </div>
+                <div class="table-wrap">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Reserva</th>
+                                <th>Cliente</th>
+                                <th>Veiculo</th>
+                                <th>Periodo</th>
+                                <th>Valor</th>
+                                <th>Status</th>
+                                <th>Pagamento</th>
+                            </tr>
+                        </thead>
+                        <tbody id="reservationsTableBody"></tbody>
+                    </table>
+                </div>
+            </article>
+
+            <article class="panel">
+                <div class="panel-header">
+                    <h2>Notificacoes simuladas</h2>
+                    <p>Eventos gerados apos a resposta do pagamento.</p>
+                </div>
+                <div id="notificationsList" class="timeline"></div>
+            </article>
+        </section>
+    </main>
+
+    <script src="./app.js" defer></script>
+</body>
+</html>
