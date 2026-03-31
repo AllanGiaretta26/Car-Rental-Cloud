@@ -386,3 +386,7 @@ Observacoes importantes:
 - O projeto ja nasce com separacao de responsabilidades e com um fluxo assincrono realista.
 - O setup local atende ao requisito de baixo custo porque roda 100% em containers locais.
 - O deploy Azure foi deixado como caminho opcional, documentado e com alertas explicitos de custo.
+
+## Autor
+Desenvolvido por Allan Giaretta.
+
