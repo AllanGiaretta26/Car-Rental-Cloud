@@ -1,41 +1,49 @@
 @model AluguelCarros.Models.Veiculo
 
-<h2>Editar Veículo</h2>
+@{
+    ViewData["Title"] = "Editar Veículo";
+}
 
-<form method="post" action="/Veiculo/Editar">
-    <input type="hidden" name="Id" value="@Model.Id" />
-
-    <div>
-        <label>Marca</label>
-        <input type="text" name="Marca" value="@Model.Marca" required />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-warning text-dark">
+                <h5 class="mb-0">Editar Veículo</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Veiculo/Editar">
+                    <input type="hidden" name="Id" value="@Model.Id" />
+                    <div class="mb-3">
+                        <label class="form-label">Marca</label>
+                        <input type="text" name="Marca" class="form-control" value="@Model.Marca" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Modelo</label>
+                        <input type="text" name="Modelo" class="form-control" value="@Model.Modelo" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ano</label>
+                        <input type="text" name="Ano" class="form-control" value="@Model.Ano" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Placa</label>
+                        <input type="text" name="Placa" class="form-control" value="@Model.Placa" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Valor da Diária (R$)</label>
+                        <input type="text" name="ValorDiaria" class="form-control" value="@Model.ValorDiaria" required />
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="Disponivel" value="true" class="form-check-input" id="disponivel"
+                               @(Model.Disponivel ? "checked" : "") />
+                        <label class="form-check-label" for="disponivel">Disponível para aluguel</label>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-warning">Salvar</button>
+                        <a href="/Veiculo" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <br />
-    <div>
-        <label>Modelo</label>
-        <input type="text" name="Modelo" value="@Model.Modelo" required />
-    </div>
-    <br />
-    <div>
-        <label>Ano</label>
-        <input type="number" name="Ano" value="@Model.Ano" required />
-    </div>
-    <br />
-    <div>
-        <label>Placa</label>
-        <input type="text" name="Placa" value="@Model.Placa" required />
-    </div>
-    <br />
-    <div>
-        <label>Valor da Diária (R$)</label>
-        <input type="text" name="ValorDiaria" value="@Model.ValorDiaria" required />
-    </div>
-    <br />
-    <div>
-        <label>Disponível</label>
-        <input type="checkbox" name="Disponivel" value="true"
-               @(Model.Disponivel ? "checked" : "") />
-    </div>
-    <br />
-    <button type="submit">Salvar</button>
-    <a href="/Veiculo">Cancelar</a>
-</form>
+</div>

@@ -1,32 +1,57 @@
 @model IEnumerable<AluguelCarros.Models.Veiculo>
 
-<h2>Veículos</h2>
+@{
+    ViewData["Title"] = "Veículos";
+}
 
-<a href="/Veiculo/Criar">Cadastrar novo veículo</a>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h2 class="mb-0">Veículos</h2>
+    <a href="/Veiculo/Criar" class="btn btn-primary">+ Cadastrar veículo</a>
+</div>
 
-<table border="1" cellpadding="8">
-    <tr>
-        <th>Marca</th>
-        <th>Modelo</th>
-        <th>Ano</th>
-        <th>Placa</th>
-        <th>Valor Diária</th>
-        <th>Disponível</th>
-        <th>Ações</th>
-    </tr>
-    @foreach (var veiculo in Model)
-    {
-        <tr>
-            <td>@veiculo.Marca</td>
-            <td>@veiculo.Modelo</td>
-            <td>@veiculo.Ano</td>
-            <td>@veiculo.Placa</td>
-            <td>R$ @veiculo.ValorDiaria</td>
-            <td>@(veiculo.Disponivel ? "Sim" : "Não")</td>
-            <td>
-                <a href="/Veiculo/Editar/@veiculo.Id">Editar</a> |
-                <a href="/Veiculo/Excluir/@veiculo.Id">Excluir</a>
-            </td>
-        </tr>
-    }
-</table>
+@if (!Model.Any())
+{
+    <div class="alert alert-info">Nenhum veículo cadastrado ainda.</div>
+}
+else
+{
+    <table class="table table-striped table-hover">
+        <thead class="table-dark">
+            <tr>
+                <th>Marca</th>
+                <th>Modelo</th>
+                <th>Ano</th>
+                <th>Placa</th>
+                <th>Valor Diária</th>
+                <th>Disponível</th>
+                <th>Ações</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var veiculo in Model)
+            {
+                <tr>
+                    <td>@veiculo.Marca</td>
+                    <td>@veiculo.Modelo</td>
+                    <td>@veiculo.Ano</td>
+                    <td>@veiculo.Placa</td>
+                    <td>@veiculo.ValorDiaria.ToString("C", new System.Globalization.CultureInfo("pt-BR"))</td>
+                    <td>
+                        @if (veiculo.Disponivel)
+                        {
+                            <span class="badge bg-success">Sim</span>
+                        }
+                        else
+                        {
+                            <span class="badge bg-danger">Não</span>
+                        }
+                    </td>
+                    <td>
+                        <a href="/Veiculo/Editar/@veiculo.Id" class="btn btn-sm btn-outline-primary">Editar</a>
+                        <a href="/Veiculo/Excluir/@veiculo.Id" class="btn btn-sm btn-outline-danger">Excluir</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+}

@@ -1,28 +1,39 @@
 @model AluguelCarros.Models.Cliente
 
-<h2>Cadastrar Cliente</h2>
+@{
+    ViewData["Title"] = "Cadastrar Cliente";
+}
 
-<form method="post" action="/Cliente/Criar">
-    <div>
-        <label>Nome</label>
-        <input type="text" name="Nome" required />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Cadastrar Cliente</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Cliente/Criar">
+                    <div class="mb-3">
+                        <label class="form-label">Nome</label>
+                        <input type="text" name="Nome" class="form-control" placeholder="Ex: João Silva" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Email</label>
+                        <input type="email" name="Email" class="form-control" placeholder="Ex: joao@email.com" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">CPF</label>
+                        <input type="text" name="CPF" class="form-control" placeholder="000.000.000-00" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Telefone</label>
+                        <input type="text" name="Telefone" class="form-control" placeholder="(00) 00000-0000" required />
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="/Cliente" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <br />
-    <div>
-        <label>Email</label>
-        <input type="email" name="Email" required />
-    </div>
-    <br />
-    <div>
-        <label>CPF</label>
-        <input type="text" name="CPF" placeholder="000.000.000-00" required />
-    </div>
-    <br />
-    <div>
-        <label>Telefone</label>
-        <input type="text" name="Telefone" placeholder="(00) 00000-0000" required />
-    </div>
-    <br />
-    <button type="submit">Salvar</button>
-    <a href="/Cliente">Cancelar</a>
-</form>
+</div>

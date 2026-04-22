@@ -1,38 +1,47 @@
 @model AluguelCarros.Models.Veiculo
 
-<h2>Cadastrar Veículo</h2>
+@{
+    ViewData["Title"] = "Cadastrar Veículo";
+}
 
-<form method="post" action="/Veiculo/Criar">
-    <div>
-        <label>Marca</label>
-        <input type="text" name="Marca" required />
+<div class="row justify-content-center">
+    <div class="col-md-6">
+        <div class="card shadow-sm">
+            <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">Cadastrar Veículo</h5>
+            </div>
+            <div class="card-body">
+                <form method="post" action="/Veiculo/Criar">
+                    <div class="mb-3">
+                        <label class="form-label">Marca</label>
+                        <input type="text" name="Marca" class="form-control" placeholder="Ex: Toyota" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Modelo</label>
+                        <input type="text" name="Modelo" class="form-control" placeholder="Ex: Corolla" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Ano</label>
+                        <input type="text" name="Ano" class="form-control" placeholder="Ex: 2023" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Placa</label>
+                        <input type="text" name="Placa" class="form-control" placeholder="Ex: ABC1234" required />
+                    </div>
+                    <div class="mb-3">
+                        <label class="form-label">Valor da Diária (R$)</label>
+                        <input type="text" name="ValorDiaria" class="form-control" placeholder="Ex: 150,00" required />
+                    </div>
+                    <div class="mb-3 form-check">
+                        <input type="checkbox" name="Disponivel" value="true" class="form-check-input" id="disponivel" checked />
+                        <label class="form-check-label" for="disponivel">Disponível para aluguel</label>
+                    </div>
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">Salvar</button>
+                        <a href="/Veiculo" class="btn btn-outline-secondary">Cancelar</a>
+                    </div>
+                </form>
+            </div>
+        </div>
     </div>
-    <br />
-    <div>
-        <label>Modelo</label>
-        <input type="text" name="Modelo" required />
-    </div>
-    <br />
-    <div>
-        <label>Ano</label>
-        <input type="text" name="Ano" required />
-    </div>
-    <br />
-    <div>
-        <label>Placa</label>
-        <input type="text" name="Placa" required />
-    </div>
-    <br />
-    <div>
-        <label>Valor da Diária (R$)</label>
-        <input type="text" name="ValorDiaria" placeholder="Ex: 150,50" required />
-    </div>
-    <br />
-    <div>
-        <label>Disponível</label>
-        <input type="checkbox" name="Disponivel" value="true" checked />
-    </div>
-    <br />
-    <button type="submit">Salvar</button>
-    <a href="/Veiculo">Cancelar</a>
-</form>
+</div>
