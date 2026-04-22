@@ -1,0 +1,28 @@
+@model AluguelCarros.Models.Cliente
+
+<h2>Cadastrar Cliente</h2>
+
+<form method="post" action="/Cliente/Criar">
+    <div>
+        <label>Nome</label>
+        <input type="text" name="Nome" required />
+    </div>
+    <br />
+    <div>
+        <label>Email</label>
+        <input type="email" name="Email" required />
+    </div>
+    <br />
+    <div>
+        <label>CPF</label>
+        <input type="text" name="CPF" placeholder="000.000.000-00" required />
+    </div>
+    <br />
+    <div>
+        <label>Telefone</label>
+        <input type="text" name="Telefone" placeholder="(00) 00000-0000" required />
+    </div>
+    <br />
+    <button type="submit">Salvar</button>
+    <a href="/Cliente">Cancelar</a>
+</form>

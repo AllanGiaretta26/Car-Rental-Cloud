@@ -1,0 +1,28 @@
+@model IEnumerable<AluguelCarros.Models.Cliente>
+
+<h2>Clientes</h2>
+
+<a href="/Cliente/Criar">Cadastrar novo cliente</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>CPF</th>
+        <th>Telefone</th>
+        <th>Ações</th>
+    </tr>
+    @foreach (var cliente in Model)
+    {
+        <tr>
+            <td>@cliente.Nome</td>
+            <td>@cliente.Email</td>
+            <td>@cliente.CPF</td>
+            <td>@cliente.Telefone</td>
+            <td>
+                <a href="/Cliente/Editar/@cliente.Id">Editar</a> |
+                <a href="/Cliente/Excluir/@cliente.Id">Excluir</a>
+            </td>
+        </tr>
+    }
+</table>

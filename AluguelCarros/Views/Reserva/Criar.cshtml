@@ -1,0 +1,43 @@
+@model AluguelCarros.Models.Reserva
+
+<h2>Nova Reserva</h2>
+
+<form method="post" action="/Reserva/Criar">
+    <div>
+        <label>Cliente</label>
+        <select name="ClienteId" required>
+            <option value="">-- Selecione um cliente --</option>
+            @foreach (var item in (SelectList)ViewBag.Clientes)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <br />
+    <div>
+        <label>Veículo disponível</label>
+        <select name="VeiculoId" required>
+            <option value="">-- Selecione um veículo --</option>
+            @foreach (var item in (SelectList)ViewBag.Veiculos)
+            {
+                <option value="@item.Value">@item.Text</option>
+            }
+        </select>
+    </div>
+    <br />
+    <div>
+        <label>Data de Início</label>
+        <input type="date" name="DataInicio" required />
+    </div>
+    <br />
+    <div>
+        <label>Data de Fim</label>
+        <input type="date" name="DataFim" required />
+    </div>
+    <br />
+    <p style="color: gray; font-size: 13px;">
+        O valor total será calculado automaticamente.
+    </p>
+    <button type="submit">Confirmar Reserva</button>
+    <a href="/Reserva">Cancelar</a>
+</form>

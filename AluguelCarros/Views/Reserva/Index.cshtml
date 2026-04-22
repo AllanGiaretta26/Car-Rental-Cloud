@@ -1,0 +1,39 @@
+@model IEnumerable<AluguelCarros.Models.Reserva>
+
+<h2>Reservas</h2>
+
+<a href="/Reserva/Criar">Nova reserva</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Cliente</th>
+        <th>Veículo</th>
+        <th>Data Início</th>
+        <th>Data Fim</th>
+        <th>Valor Total</th>
+        <th>Status</th>
+        <th>Ações</th>
+    </tr>
+    @foreach (var reserva in Model)
+    {
+        <tr>
+            <td>@reserva.Cliente?.Nome</td>
+            <td>@reserva.Veiculo?.Modelo</td>
+            <td>@reserva.DataInicio.ToString("dd/MM/yyyy")</td>
+            <td>@reserva.DataFim.ToString("dd/MM/yyyy")</td>
+            <td>R$ @reserva.ValorTotal.ToString("F2")</td>
+            <td>@reserva.Status</td>
+            <td>
+                @if (reserva.Status == "Pendente")
+                {
+                    <a href="/Reserva/Aprovar/@reserva.Id">Aprovar</a>
+                    <span> | </span>
+                }
+                @if (reserva.Status != "Cancelada")
+                {
+                    <a href="/Reserva/Cancelar/@reserva.Id">Cancelar</a>
+                }
+            </td>
+        </tr>
+    }
+</table>

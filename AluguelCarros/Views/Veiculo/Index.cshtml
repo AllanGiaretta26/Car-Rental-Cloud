@@ -1,0 +1,32 @@
+@model IEnumerable<AluguelCarros.Models.Veiculo>
+
+<h2>Veículos</h2>
+
+<a href="/Veiculo/Criar">Cadastrar novo veículo</a>
+
+<table border="1" cellpadding="8">
+    <tr>
+        <th>Marca</th>
+        <th>Modelo</th>
+        <th>Ano</th>
+        <th>Placa</th>
+        <th>Valor Diária</th>
+        <th>Disponível</th>
+        <th>Ações</th>
+    </tr>
+    @foreach (var veiculo in Model)
+    {
+        <tr>
+            <td>@veiculo.Marca</td>
+            <td>@veiculo.Modelo</td>
+            <td>@veiculo.Ano</td>
+            <td>@veiculo.Placa</td>
+            <td>R$ @veiculo.ValorDiaria</td>
+            <td>@(veiculo.Disponivel ? "Sim" : "Não")</td>
+            <td>
+                <a href="/Veiculo/Editar/@veiculo.Id">Editar</a> |
+                <a href="/Veiculo/Excluir/@veiculo.Id">Excluir</a>
+            </td>
+        </tr>
+    }
+</table>

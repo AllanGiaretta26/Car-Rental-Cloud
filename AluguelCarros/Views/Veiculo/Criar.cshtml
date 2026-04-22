@@ -1,0 +1,38 @@
+@model AluguelCarros.Models.Veiculo
+
+<h2>Cadastrar Veículo</h2>
+
+<form method="post" action="/Veiculo/Criar">
+    <div>
+        <label>Marca</label>
+        <input type="text" name="Marca" required />
+    </div>
+    <br />
+    <div>
+        <label>Modelo</label>
+        <input type="text" name="Modelo" required />
+    </div>
+    <br />
+    <div>
+        <label>Ano</label>
+        <input type="text" name="Ano" required />
+    </div>
+    <br />
+    <div>
+        <label>Placa</label>
+        <input type="text" name="Placa" required />
+    </div>
+    <br />
+    <div>
+        <label>Valor da Diária (R$)</label>
+        <input type="text" name="ValorDiaria" placeholder="Ex: 150,50" required />
+    </div>
+    <br />
+    <div>
+        <label>Disponível</label>
+        <input type="checkbox" name="Disponivel" value="true" checked />
+    </div>
+    <br />
+    <button type="submit">Salvar</button>
+    <a href="/Veiculo">Cancelar</a>
+</form>

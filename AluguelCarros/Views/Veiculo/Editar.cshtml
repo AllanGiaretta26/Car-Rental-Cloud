@@ -1,0 +1,41 @@
+@model AluguelCarros.Models.Veiculo
+
+<h2>Editar Veículo</h2>
+
+<form method="post" action="/Veiculo/Editar">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div>
+        <label>Marca</label>
+        <input type="text" name="Marca" value="@Model.Marca" required />
+    </div>
+    <br />
+    <div>
+        <label>Modelo</label>
+        <input type="text" name="Modelo" value="@Model.Modelo" required />
+    </div>
+    <br />
+    <div>
+        <label>Ano</label>
+        <input type="number" name="Ano" value="@Model.Ano" required />
+    </div>
+    <br />
+    <div>
+        <label>Placa</label>
+        <input type="text" name="Placa" value="@Model.Placa" required />
+    </div>
+    <br />
+    <div>
+        <label>Valor da Diária (R$)</label>
+        <input type="text" name="ValorDiaria" value="@Model.ValorDiaria" required />
+    </div>
+    <br />
+    <div>
+        <label>Disponível</label>
+        <input type="checkbox" name="Disponivel" value="true"
+               @(Model.Disponivel ? "checked" : "") />
+    </div>
+    <br />
+    <button type="submit">Salvar</button>
+    <a href="/Veiculo">Cancelar</a>
+</form>

@@ -1,0 +1,30 @@
+@model AluguelCarros.Models.Cliente
+
+<h2>Editar Cliente</h2>
+
+<form method="post" action="/Cliente/Editar">
+    <input type="hidden" name="Id" value="@Model.Id" />
+
+    <div>
+        <label>Nome</label>
+        <input type="text" name="Nome" value="@Model.Nome" required />
+    </div>
+    <br />
+    <div>
+        <label>Email</label>
+        <input type="email" name="Email" value="@Model.Email" required />
+    </div>
+    <br />
+    <div>
+        <label>CPF</label>
+        <input type="text" name="CPF" value="@Model.CPF" required />
+    </div>
+    <br />
+    <div>
+        <label>Telefone</label>
+        <input type="text" name="Telefone" value="@Model.Telefone" required />
+    </div>
+    <br />
+    <button type="submit">Salvar</button>
+    <a href="/Cliente">Cancelar</a>
+</form>
