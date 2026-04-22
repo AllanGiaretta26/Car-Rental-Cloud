@@ -1,11 +1,13 @@
 using AluguelCarros.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AluguelCarros.Controllers
 {
+    [Authorize]
     public class ClienteController : Controller
-    {
+    {   
         private readonly AppDbContext _context;
 
         public ClienteController(AppDbContext context)

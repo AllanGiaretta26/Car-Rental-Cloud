@@ -2,9 +2,11 @@ using AluguelCarros.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AluguelCarros.Controllers
-{
+{	
+	[Authorize]
 	public class ReservaController : Controller
 	{
 		private readonly AppDbContext _context;

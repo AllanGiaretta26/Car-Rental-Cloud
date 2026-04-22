@@ -1,8 +1,15 @@
 using AluguelCarros.Models;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Identity.Web;
+using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 
 var builder = WebApplication.CreateBuilder(args);
 
+// Autenticação com Azure Entra ID
+builder.Services.AddMicrosoftIdentityWebAppAuthentication(
+    builder.Configuration, "AzureAd");
+
+// Banco de dados
 builder.Services.AddDbContext<AppDbContext>(options =>
     options.UseSqlServer(
         builder.Configuration.GetConnectionString("DefaultConnection"),
@@ -17,6 +24,9 @@ var app = builder.Build();
 
 app.UseStaticFiles();
 app.UseRouting();
+
+// Autenticação e autorização
+app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllerRoute(

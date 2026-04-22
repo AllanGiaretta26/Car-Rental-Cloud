@@ -1,9 +1,11 @@
 using AluguelCarros.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Authorization;
 
 namespace AluguelCarros.Controllers
 {
+    [Authorize]
     public class VeiculoController : Controller
     {
         private readonly AppDbContext _context;
