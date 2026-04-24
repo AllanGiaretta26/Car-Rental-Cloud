@@ -1,4 +1,4 @@
-# 🚗 Aplicação de Aluguel de Carros
+# 🚗 Car-Rental-Cloud
 
 ![.NET](https://img.shields.io/badge/.NET-10.0-512BD4?logo=dotnet)
 ![ASP.NET Core](https://img.shields.io/badge/ASP.NET_Core-MVC-512BD4?logo=dotnet)
@@ -62,8 +62,8 @@ O acesso ao sistema é protegido por autenticação via **Azure Entra ID** (Open
 ### Clonar o repositório
 
 ```bash
-git clone https://github.com/AllanGiaretta26/Aplicacao-de-Aluguel-de-Carros.git
-cd Aplicacao-de-Aluguel-de-Carros
+git clone https://github.com/AllanGiaretta26/Car-Rental-Cloud.git
+cd Car-Rental-Cloud
 ```
 
 ### Configurar variáveis de ambiente
@@ -89,7 +89,7 @@ dotnet ef database update
 dotnet run
 ```
 
-Acesse em: `https://localhost:5001`
+Acesse em: `https://localhost:5000`
 
 ---
 
@@ -136,3 +136,7 @@ dotnet publish -c Release -o ./publish
 ## Licença
 
 Este projeto está sob a licença [MIT](./LICENSE).
+
+---
+
+Desenvolvido por [Allan Giaretta](https://github.com/AllanGiaretta26).
