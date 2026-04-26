@@ -9,7 +9,7 @@
 
 > Sistema web para gerenciamento de aluguel de veículos, com cadastro de clientes, frota e reservas, autenticação segura via Azure Entra ID e deploy em nuvem no Azure App Service.
 
-🔗 **Demo ao vivo:** [aluguel-carros-app-efc2fsa5hwabf6et.westus2-01.azurewebsites.net](https://aluguel-carros-app-efc2fsa5hwabf6et.westus2-01.azurewebsites.net/)
+🔗 **Demo pausada:** [aluguel-carros-app-efc2fsa5hwabf6et.westus2-01.azurewebsites.net](https://aluguel-carros-app-efc2fsa5hwabf6et.westus2-01.azurewebsites.net/)
 
 ---
 
